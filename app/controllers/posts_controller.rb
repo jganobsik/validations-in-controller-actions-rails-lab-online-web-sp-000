@@ -8,9 +8,13 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post.update(post_params)
+    @author = Author.new(author_params)
 
-    redirect_to post_path(@post)
+    if @author.save
+      redirect_to author_path(@author)
+    else
+      render :new
+    end
   end
 
   private
